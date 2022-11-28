@@ -1,0 +1,44 @@
+class Solution {
+    public int romanToInt(String s) {
+        Map<Character, Map<Character, Integer>> substractionByChar = new HashMap<>() {{
+            put('I', new HashMap<>() {{
+                put('V', 4);
+                put('X', 9);
+            }});
+            put('X', new HashMap<>() {{
+                put('L', 40);
+                put('C', 90);
+            }});
+            put('C', new HashMap<>() {{
+                put('D', 400);
+                put('M', 900);
+            }});
+        }};
+        Map<Character, Integer> romans = new HashMap<>() {{
+            put('I', 1); put('V', 5); put('X', 10);
+            put('L', 50); put('C', 100); put('D', 500);
+            put('M', 1000);
+        }};
+        int total = 0;
+        char[] arrAsChar = s.toCharArray();
+        for(int i = 0; i < arrAsChar.length; i++) {
+            char val = arrAsChar[i];
+            boolean isSubstractionChar = substractionByChar.containsKey(val);
+            boolean isFinalChar = (i == (arrAsChar.length - 1));
+            if(isSubstractionChar && !isFinalChar) {
+                char valNext = arrAsChar[i+1];
+                boolean hasSubstractionChar = substractionByChar.containsKey(val) && substractionByChar.get(val).get(valNext) != null;
+                if(hasSubstractionChar) {
+                    int sumValue = substractionByChar.get(val).get(valNext);
+                    total += sumValue;
+                    i++;
+                } else {
+                    total += romans.get(val);
+                }
+            } else {
+                total += romans.get(val);
+            }
+        }
+        return total;
+    }
+}
