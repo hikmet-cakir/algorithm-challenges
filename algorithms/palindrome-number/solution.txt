@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        String argAsString = x + "";
+        char[] argsAsCharArr = argAsString.toCharArray();
+        for(int i = 0; i < argsAsCharArr.length / 2; i++) {
+            char charHead = argsAsCharArr[i];
+            int lastIndex = (argsAsCharArr.length - i) - 1;
+            char charLast = argsAsCharArr[lastIndex];
+            if(charHead != charLast) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
