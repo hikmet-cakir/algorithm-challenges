@@ -1,1 +1,2 @@
-# leetcode-challenge
+# algorithm-challenges
+
